@@ -1,0 +1,37 @@
+<% title 'Register' %>
+<% noindex %>
+<div class="container">
+<div class="col-md-6 col-md-offset-3 panel panel-default margin-top-40">
+  <div class="panel-body">
+    <div class="section-divider">
+      <h1>Sign Up</h1>
+      <p>Already have an account? Click here to <%= link_to "log in", new_user_session_path %>.</p>
+    </div>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-group">
+    <%= f.input :username, required: true, input_html: {class: "form-control input-sm"} %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :email, required: true, input_html: {class: "form-control input-sm"} %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :password, required: true, input_html: {class: "form-control input-sm"} %>
+    <p><small><%= @minimum_password_length %> characters minimum</small></p>
+  </div>
+
+  
+  <p><small>By Signing Up, you confirm that you accept our Terms of Use and Privacy Policy.</small></p>
+  <br>
+  <div class="form-group">
+    <%= f.button :button, "Register", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin right-5'></i> Please wait..."} %>
+  </div>
+<% end %>
+
+</div>
+</div>
+</div>

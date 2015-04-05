@@ -1,0 +1,30 @@
+<% title 'Malaysia #1 Freelancing Portal' %>
+<% description 'All Professional Services For One Unbeatable Price' %>
+
+<%= render 'layouts/jumbotron' %>
+
+<div class="container">
+<div class="welcome-container">
+ <div class="row">
+  <center>
+      <h3><strong>FEATURED SERVICES</strong></h3>
+      <h4>Noteworthy Professionals</h4>
+  </center>
+  <% @gigs.each do |gig| %>
+    <div class="col-md-3">
+      <div class="thumbnail">
+          <% @images.where(gig_id: gig).first(1).each do |image| %>
+            <%= link_to image_tag(image.graphic.url), gig %>
+          <% end %>
+          <div class="caption">
+          <h4><%= link_to "#{gig.gig_title}", gig %></h4>
+            <div class="user-n-price">
+              <p><%= image_tag gig.user.avatar(:xs), class: "img-circle gig-member-icon" %> <%= gig.user.username %><span class="pricing">RM 25</span></p>
+            </div>
+          </div>
+      </div>
+     </div>
+  <% end %>
+  </div>
+</div>
+</div>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  gig_id: 1
+  user_id: 1
+  subject: MyString
+  body: MyText
+  communication_rating: 1
+  service_rating: 1
+  recommend_rating: 1
+
+two:
+  gig_id: 1
+  user_id: 1
+  subject: MyString
+  body: MyText
+  communication_rating: 1
+  service_rating: 1
+  recommend_rating: 1

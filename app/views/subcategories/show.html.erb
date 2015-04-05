@@ -1,0 +1,53 @@
+<% title @subcategory.name %>
+<div class="container">
+
+<div class="subcategory-box">
+  <h1><strong><%= @subcategory.name %></strong></h1>
+  <p>In <span class="green-text"><%= @subcategory.category.name %></span></p>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="sidebar">
+      <h4><%= @subcategory.category.name %></h4>
+        <ul class="category-section">
+          <% @subcategories.where(category_id: @subcategory.category_id).each do |subcategory| %>
+             <li><%= link_to "#{subcategory.name}", subcategory %></li>
+          <% end %>
+        </ul>
+        
+        <div class="filter-box">
+        <%= render 'search' %>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="row">
+      <div class="gig-filter">
+        Sort by:
+        <%= sort_link @search, :id, "New" %>
+        <%= sort_link @search, :view_count, "Most Viewed", default_order: :desc %>
+        <%= sort_link @search, :id, "High Rating", default_order: :desc %>
+      </div>
+      <% @gigs.where(subcategory_id: @subcategory).each do |gig| %>
+        <div class="col-md-4">
+          <div class="thumbnail">
+              <% @images.where(gig_id: gig).first(1).each do |image| %>
+                <%= link_to (image_tag image.graphic.url), gig %>
+              <% end %>
+              
+              <div class="caption">
+              
+              <h4><%= link_to "#{gig.gig_title}", gig %></h4>
+                <div class="user-n-price">
+                  <p><%= image_tag gig.user.avatar(:xs), class: "img-circle gig-member-icon" %> <%= gig.user.username %><span class="pricing">RM 25</span></p>
+                </div>
+              </div>
+          </div>
+         </div>
+      <% end %>
+    </div>
+    <center><%= paginate @gigs %></center>
+  </div>
+</div>
+
+</div>

@@ -1,0 +1,93 @@
+<% title 'Complete your order' %>
+<div class="container">
+  <div class="page-title">
+    <h1><strong>Complete Your Order</strong></h1>
+    <p>You'll be placing an order to the seller, <span class="green-text"><%= @gig.user.username %></span></p>
+  </div>
+  <div class="gig-container-alt-2">
+    <div class="row">
+    <%= simple_form_for([@gig, @order]) do |f| %>
+      <% if @order.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+          <ul>
+          <% @order.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+	  <div class="col-md-8">
+	    <div class="section-divider">
+	    <h3>Order Details</h3>
+	    </div>
+	    
+	    <table class="table table-bordered">
+	      <thead>
+	        <tr>
+	          <th>Item</th>
+	          <th>Price</th>
+	        </tr>
+	      </thead>
+
+	      <tbody>
+	          <tr>
+	            <td><%= @gig.gig_title %></td>
+	            <td>RM 25.00</td>
+	          </tr>
+	          <tr>
+	            <td>Coffee for our developers :)</td>
+	            <td>RM 3.50</td>
+	          </tr>
+	      </tbody>
+	    </table>
+
+	    <h3 class="green-text" style="text-align:right;">Total: RM 28.50</h3>
+       
+	    <div class="form-group remark-box">
+	      <%= f.input :remark, label: "Order Notes", placeholder: "Enter special instructions for the seller. This is optional", input_html: {rows: 5, class: "form-control input-sm"} %>
+	    </div>
+	  </div>
+	  <div class="col-md-4" style="border-left: 1px dotted #cecece;">
+	    <div class="section-divider">
+	    <h3>Buyer Details</h3>
+	    </div>
+
+	       <div class="form-group">
+	         <%= f.input :name, label: "Full Name", placeholder: "John Smith", input_html: {value: "#{current_user.name}", class: "form-control input-sm"} %>
+	       </div>
+
+	       <div class="form-group">
+	         <%= f.input :address_one, label: "Billing Address", placeholder: "Address Line 1", input_html: {value: "#{current_user.address_one}", class: "form-control input-sm"} %>
+	       </div>
+	       
+	       <div class="form-group">
+	         <%= f.input :address_two, label: false, placeholder: "Address Line 2", input_html: {value: "#{current_user.address_two}", class: "form-control input-sm"} %>
+	       </div>
+
+	       <div class="form-group">
+	         <%= f.input :zipcode, label: false, placeholder: "zipcode", input_html: {value: "#{current_user.zipcode}", class: "form-control input-sm"} %>
+	       </div>
+
+	       <div class="form-group">
+	         <%= f.input :city, label: false, placeholder: "City", input_html: {value: "#{current_user.city}", class: "form-control input-sm"} %>
+	       </div>
+
+	       <div class="form-group">
+	         <%= f.input :state, label: false, placeholder: "State", input_html: {value: "#{current_user.state}", class: "form-control input-sm"} %>
+	       </div>
+
+	       <div class="form-group">
+	         <%= f.input :country, label: false, priority: [ "Malaysia" ], input_html: {class: "form-control input-sm"} %>
+	       </div>
+
+	       <div class="form-group">
+	         <%= f.button :button, "Continue", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin right-5'></i> Please wait..."} %>
+	       </div>
+	     
+	  </div>
+	  <% end %>
+    </div>
+  </div>    
+</div>

@@ -1,0 +1,67 @@
+<%= simple_form_for(@gig, :html => { :multipart => true }) do |f| %>
+  <% if @gig.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gig.errors.count, "error") %> prohibited this gig from being saved:</h2>
+
+      <ul>
+      <% @gig.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="gig-container-alt-2">
+    <div class="form-group">
+      <%= f.input :featured, label: "Feature this user?", as: :radio_buttons, item_wrapper_class: "radio-inline" %>
+    </div>
+    <br>
+  
+    <div class="form-group">
+      <label>Category</label> <small>Choose the closest category</small>
+      <%= f.association :category, label: false, collection: @categories, prompt: "Select Type", input_html: {:id => 'categories_select', class: "form-control input-sm"} %>
+    </div>
+
+    <div class="form-group">
+      <label>Subcategory</label> <small>Which best describe your service?</small>
+      <%= f.association :subcategory, label: false, collection: @subcategories, prompt: "Select Subcategory", input_html: {:id => 'subcategories_select', class: "form-control input-sm"} %>
+    </div>
+
+    <div class="form-group">
+      <%= f.input :processing_time, label: 'Processing Time', collection: Gig::PROCESSING_SELECT, prompt: "I can fulfil your order in...", input_html: {class: "form-control input-sm"} %>
+    </div>
+  </div>
+
+  <div class="gig-container-alt-2">
+    <div class="form-group" data-toggle="tooltip" data-placement="right" title="Tooltip on right">
+      <label>Title</label> <small>Descriptive titles are best. Maximum 140 characters. <span id="counter" class="counter">140</span> characters left</span></small>
+      <%= f.input :gig_title, label: false, placeholder: "Enter something fun", input_html: {class: "form-control input-sm"} %>
+    </div>
+    <br>
+    <div class="form-group width-99">
+      <label>Description</label> <small>Try to answer the questions buyers will have. Tell the item's story and explain why it's special.</small>
+      <%= f.input :description, label: false, placeholder: "Enter some funny description", input_html: {:rows => 10, class: "tinymce" } %>
+    </div>    
+  </div>
+
+  <div class="gig-container-alt-2">
+    <label>Photos</label> <small>A picture speaks a thousand words. Clear, stunning photos are recommended.</small>
+    <div class="form-group">
+      <div class="row">
+        <%= f.fields_for :images do |builder| %>
+          <%= render 'image_fields', f: builder %> 
+        <% end %>
+        <div class="links">
+          <%= link_to_add_association 'Add More Image', f, :images, class: "btn-sm btn-link" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group text-right">
+    <%= f.button :button, "Submit", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin right-5'></i> Please wait..."} %>
+  </div>
+<% end %>
+
+<%= tinymce %>
+

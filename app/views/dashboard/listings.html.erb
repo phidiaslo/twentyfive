@@ -1,0 +1,49 @@
+<% title 'Dashboard' %>
+<% noindex %>
+<div class="container">
+<div class="row">
+  <div class="col-md-9">
+	<div class="gig-container-alt">
+	<%= form_tag edit_individual_gigs_path do %>
+	  <div class="button-bar">
+		  <div>
+	        <%= submit_tag "Suspend", class: "btn btn-default" %>
+	        <%= submit_tag "Activate", class: "btn btn-default" %>
+	        <%= submit_tag "Delete", class: "btn btn-default" %>
+	        <%= link_to "Add New Service", new_gig_path, class: "btn btn-smaller btn-success float-right" %>
+	      </div>
+      </div>
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th></th>
+	      <th>SERVICE</th>
+	      <th>STATUS</th>
+	      <th>VIEW</th>
+	      <th colspan="1"></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <% @gigs.each do |gig| %>
+	      <tr>
+	        <td><%= check_box_tag "gig_ids[]", gig.id %></td>
+	        <td><%= gig.gig_title %></td>
+	        <td><%= gig.status %></td>
+	        <td><%= gig.view_count %></td>
+	        <td class="text-right"><%= link_to 'View', gig %>
+		        <%= link_to 'Edit', edit_gig_path(gig) %>
+		        <%= link_to 'Delete', gig, method: :delete, data: { confirm: 'Are you sure?' } %>
+		    </td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+	<% end %>
+	<center><%= paginate @gigs %></center>
+	</div>
+  </div>
+  <div class="col-md-3 right-sidebar">
+    <%= render 'dashboard/sidebar' %>
+  </div>
+</div>
+</div>

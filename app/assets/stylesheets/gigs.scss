@@ -1,0 +1,267 @@
+// Place all the styles related to the gigs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.navbar {
+  margin-bottom: 0px;
+}
+
+.content-container {
+  background-color: #EEEEEE;
+  padding-bottom: 25px;
+}
+
+.thumbnail {
+	border-radius: 0px;
+  margin-top: 5px;
+	-webkit-box-shadow: 0 0 1px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0 0 1px rgba(0,0,0,0.15);
+    box-shadow: 0 0 1px rgba(0,0,0,0.15);
+}
+
+.price-tag {
+    float: right;
+    margin-right: -20px;
+    p {
+      max-width: 60px;
+	  background: #00B22D;
+	  color: white;
+	  padding: 8px;
+ }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.gig-container{
+  border: 1px solid #cecece;
+  border-top: none;
+  padding: 0 15px;
+  border-radius: 0 0 5px 5px;
+  background-color: white;
+}
+
+.gig-container-alt {
+  border: 1px solid #cecece;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 25px;
+  background-color: white;
+}
+
+.gig-container-alt-2 {
+  border: 1px solid #cecece;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 25px 0;
+  background-color: white;
+}
+
+
+.border-right {
+  border-right: 1px solid #cecece;
+  padding: 20px;
+}
+
+.sidebar-right {
+  padding: 20px;
+}
+
+.btn-success {
+  background-color: #00b22d;
+  border: 1px solid #028a25;
+  padding: 16px 40px;
+  border-radius: 3px;
+  font: 500 16px/16px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  color: white;
+}
+
+.btn-default {
+  padding: 10px 20px;
+  border-radius: 3px;
+  font: 500 16px/16px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+
+.btn-smaller {
+  padding: 10px 20px;
+}
+
+.float-right {
+  float: right;
+}
+
+.button-bar {
+  padding: 0 0 15px 0;
+}
+
+.checkbox {
+  margin-left: 20px;
+}
+
+.table {
+  border: 1px solid #DDDDDD;
+  background-color: #FFFFFF;
+  margin-bottom: 10px;
+  th {
+    padding-left: 20px !important;
+    background-color: #EEEEEE;
+    border-bottom: 1px solid #DDDDDD !important;
+    color: #777777;
+  }
+  td {
+    padding: 20px 20px !important;
+    max-width: 300px;
+  }
+}
+
+
+.gig-filter {
+  background-color: #ffffff;
+  padding: 15px;
+  margin: 0 15px 15px 15px;
+  position: relative;
+  border: 1px solid #dddddd;
+  -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+  ul {
+    list-style: none;
+    list-style-image: none;
+    padding: 0;
+    margin-bottom: 0;
+  }
+
+  a {
+    font-size: 13px;
+    margin: 0 15px;
+    font-weight: 500;
+    line-height: 18px;
+    position: relative;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+  }
+}
+
+.caption {
+  padding: 5px;
+  h4 {
+    font-size: 14px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+  a {
+    color: #333333;
+  }
+  a:hover {
+    color: #00B22D;
+    text-decoration: none;
+  }
+}
+
+.thumbnail {
+  a {
+  img {
+  width: 100%;
+  height: 142px;
+  }
+  }
+}
+
+.profile-box {
+  margin: 20px 0 10px 0;
+  font-size: 16px;
+}
+
+.tooltip {
+  width: 300px;
+}
+
+.padding-3 {
+  padding-top: 3px;
+}
+
+.width-99 {
+  width: 99.99%;
+}
+
+.pricing {
+  color: #00B22D;
+  float: right;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 3px 0;
+}
+
+.gig-member-icon {
+ border: 1px solid #f7f7f7;
+}
+
+.user-n-price {
+  vertical-align: middle;
+  p {
+    color: #A2A2A2;
+    margin: 0;
+  }
+}
+
+.welcome-container {
+  border-top: 1px solid #E5E5E5;
+  border-left: 1px solid #E5E5E5;
+  border-right: 1px solid #E5E5E5;
+  border-bottom: 1px solid #cecece;
+  padding: 35px;
+  border-radius: 10px;
+  background-color: #F7F7F7;
+  margin-top: -70px;
+  position: relative;
+
+}
+
+  h3 {
+    padding: 0;
+    margin: 0;
+  }
+  h4 {
+    margin-top: 5px;
+    margin-bottom: 25px;
+  }
+
+.nav-tabs {
+margin-bottom: 25px;
+}
+
+.section-divider {
+  margin-bottom: 20px;
+}
+
+.pagination {
+  margin: 0;
+  }
+
+.pagination > li > a, .pagination > li > span {
+padding: 5px 10px;
+margin: 0 5px;
+border: none;
+background: none;
+}
+
+.pagination > .disabled > a, .pagination > .disabled > a:hover {
+  background: none;
+}
+
+.pagination > .active > a {
+  border-radius: 20px;
+}
+
+.text-area {
+  white-space: pre-wrap;
+}

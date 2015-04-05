@@ -1,0 +1,58 @@
+<% title 'Manage Sales' %>
+<% noindex %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="gig-container-alt">
+        <div class="button-bar">
+          <h1>Sales</h1>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Buyer</th>
+              <th>Item</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+          <% @gigs.each do |gig| %>
+            <% @orders.where(gig_id: gig).each do |order| %>
+              <tr>
+                <td>
+                  <%= order.name %>
+                  <span class="next-line"><%= link_to "Order ##{order.id}", gig_order_path(gig, order) %></span>
+                </td>
+                <td>
+                  <span class="green-text"><%= order.gig.gig_title %></span>
+                </td>
+                <td><%= order.status %></td>
+                <td>
+                   <%= form_tag edit_order_status_path(id: order) do %>
+                      <% if order.status == 'Pending' %>
+                        <%= button_tag "Mark as In Progress", name: :commit, value: "Pending", class: "btn btn-status full-width" %>
+                      <% elsif order.status == 'In Progress' %>
+                        <%= button_tag "Mark as Delivered", name: :commit, value: "In Progress", class: "btn btn-status full-width" %>
+                      <% elsif order.status == 'Delivered' %>
+                        Awaiting Confirmation
+                      <% else order.status == 'Completed' %>
+                        Awaiting Buyer Review
+                      <% end %>
+                   <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      <center><%= paginate @orders %></center>
+      </div>
+    </div>
+    <div class="col-md-3 right-sidebar">
+      <%= render 'dashboard/sidebar' %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div role="tabpanel">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#details" aria-controls="ongoing" role="tab" data-toggle="tab">Description</a></li>
+    <li role="presentation"><a href="#shippingpolicy" aria-controls="complete" role="tab" data-toggle="tab">Customer Reviews</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="details">
+      <div class="description-box">
+        <%= @gig.description.html_safe %>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="reviews">
+      <div class="description-box">
+        <p>There's no shipping policy yet</p>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,41 @@
+<% title @gig.gig_title %>
+<% description "For RM25, #{@gig.user.username} will #{@gig.gig_title} | On Twenties.my" %>
+<% keywords 'Member login page.' %>
+
+<div class="container">
+<div class="gig-container">
+<div class="row">
+  <div class="col-md-8 border-right">
+    <h1><%= @gig.gig_title %></h1>
+    <p>In <%= link_to "#{@gig.subcategory.name}", subcategory_path(@gig.subcategory)  %> under <span class="green-text"><%= @gig.category.name %></span></p>
+    
+    <div class="flexslider">
+      <ul class="slides">
+        <% @image.each do |image| %>
+          <li><%= image_tag image.graphic.url(:large), class: "gig-image-box" %></li>
+        <% end %>                 
+      </ul>
+    </div>
+
+    <%= render 'tabs' %>
+    
+  </div>
+  <div class="col-md-4 sidebar-right">
+    <%= link_to 'ORDER NOW (RM 25)', new_gig_order_path(@gig), class: "btn btn-success btn-lg full-width" %>
+    
+    <div class="profile-box">
+      <%= image_tag @gig.user.avatar(:small), class: "img-circle" %> <span class="green-text"><%= @gig.user.username %></span>
+    </div>
+    
+    <div class="text-area"><%= @gig.user.description %></div>
+
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('.flexslider').flexslider();
+  });
+</script>

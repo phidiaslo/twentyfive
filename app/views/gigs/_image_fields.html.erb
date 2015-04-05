@@ -1,0 +1,41 @@
+<!--<div class="form-group">
+  <div class="nested-fields row">
+    <div class="col-md-10">
+      <%= f.input :graphic, label: false, input_html: {class: "form-control input-sm"} %>
+    </div>
+    <div class="col-md-2 padding-3">
+      <%= link_to_remove_association "Remove", f %>
+    </div>
+  </div>
+</div>-->
+
+<div class="nested-fields">
+  <div class="col-md-4">
+    <div class="thumbnail">
+      <div class="upload-preview-<%= f.object.to_s.parameterize %>">
+        <label>
+        <%= image_tag f.object.graphic.url, class: "image-preview"%>
+        </label>
+      </div>   
+      <%= f.input :graphic, label: false, input_html: {class: "file-#{f.object.to_s.parameterize} input-sm"} %>
+    </div>
+    <div class="margin-bottom-10"><%= link_to_remove_association "Remove", f, class: "btn-link" %></div>    
+  </div>
+</div>
+  
+<script>
+$(document).ready(function(){
+    var preview = $(".upload-preview-<%= f.object.to_s.parameterize %> img");
+
+    $(".file-<%= f.object.to_s.parameterize %>").change(function(event){
+       var input = $(event.currentTarget);
+       var file = input[0].files[0];
+       var reader = new FileReader();
+       reader.onload = function(e){
+           image_base64 = e.target.result;
+           preview.attr("src", image_base64);
+       };
+       reader.readAsDataURL(file);
+    });
+});
+</script>

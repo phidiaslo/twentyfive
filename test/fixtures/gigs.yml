@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  gig_title: MyString
+  category: MyString
+  description: MyText
+  duration: 1
+  video: MyText
+
+two:
+  gig_title: MyString
+  category: MyString
+  description: MyText
+  duration: 1
+  video: MyText

@@ -1,0 +1,36 @@
+<%= search_form_for @search, url: search_gigs_path do |f| %>
+
+  <div class="form-group">
+    <%= f.select :category_id_eq, options_from_collection_for_select(Category.all, "id", "name", @search.category_id_eq), {:prompt => "Select Category"}, class: "form-control input-sm", id: "categories_select" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.select :subcategory_id_eq, options_from_collection_for_select(Subcategory.all, "id", "name", @search.subcategory_id_eq), {:prompt => "Select Subcategory"}, class: "form-control input-sm", id: "subcategories_select" %>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('#categories_select').change(function() {
+        $.ajax({
+          url: "<%= update_subcategories_path %>",
+          data: {
+            category_id : $('#categories_select').val()
+          },
+          dataType: "script"
+        });
+      });
+    });
+  </script>
+
+  <div class="form-group">
+     <%= f.select :processing_time_eq, Gig::PROCESSING_SELECT, {:prompt => "Ready to deliver in..."}, class: "form-control input-sm" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.text_field :user_username_cont, placeholder: "Enter Seller's Name", class: "form-control input-sm" %>
+  </div>
+
+  
+    <%= f.submit "Update", class: "btn btn-sm btn-primary" %> <%= link_to 'Reset', gigs_path, class: "btn btn-sm btn-link" %>
+  
+<% end %>

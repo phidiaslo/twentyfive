@@ -1,0 +1,17 @@
+<%= simple_form_for(@review) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :gig_id %>
+    <%= f.input :user_id %>
+    <%= f.input :subject %>
+    <%= f.input :body %>
+    <%= f.input :communication_rating %>
+    <%= f.input :service_rating %>
+    <%= f.input :recommend_rating %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

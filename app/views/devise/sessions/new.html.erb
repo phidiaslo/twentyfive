@@ -1,0 +1,32 @@
+<% title 'Log In' %>
+<% noindex %>
+<div class="container">
+<div class="col-md-6 col-md-offset-3 panel panel-default margin-top-40">
+  <div class="panel-body">
+<div class="section-divider">
+<h1>Log In</h1>
+<p class="sub-head">Don't have an account? Click here to <%= link_to "Register", new_user_registration_path %>.</p>
+</div>
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="form-group">
+    <%= f.input :email, required: true, input_html: {class: "form-control input-sm"} %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :password, required: true, input_html: {class: "form-control input-sm"} %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+  </div>
+
+  <div class="form-group">
+    <%= f.button :submit, "Log in", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+
+</div>
+</div>
+</div>

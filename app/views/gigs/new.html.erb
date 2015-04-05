@@ -1,0 +1,38 @@
+<% title 'Create Service' %>
+<% noindex %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="page-title">
+		  <h1><strong>Create Your Service</strong></h1>
+		  <p>Tell the customers in detail <span class="green-text">what you can offer for RM25.</span></p>
+		</div>
+      <%= render 'form' %>
+    </div>
+    <div class="col-md-3">
+
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('#categories_select').change(function() {
+      $.ajax({
+        url: "<%= update_subcategories_path %>",
+        data: {
+          category_id : $('#categories_select').val()
+        },
+        dataType: "script"
+      });
+    });
+  });
+  $(document).ready(function() {
+     $("#gig_gig_title").keyup(function() {
+       var counter = $("#counter");
+       var charsRemaining = 140 - $(this).val().length;
+       counter.text(charsRemaining);
+       counter.css('color', (charsRemaining < 0) ? 'red' : 'black');
+     });
+   });
+</script>

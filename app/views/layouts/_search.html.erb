@@ -1,0 +1,9 @@
+<div class="search-box">
+<%= search_form_for @search, url: search_gigs_path, html: { method: :post } do |f| %>
+
+<div class="form-wrapper-head cf">
+     <%= f.text_field :gig_title_or_user_email_cont, placeholder: 'Find services or seller' %>
+     <%= f.button "Search", data: {disable_with: "<i class='fa fa-spinner fa-spin right-5'></i>"}%>
+   </div>
+<% end %>
+</div>

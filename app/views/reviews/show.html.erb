@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Gig:</strong>
+  <%= @review.gig_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @review.user_id %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @review.subject %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @review.body %>
+</p>
+
+<p>
+  <strong>Communication rating:</strong>
+  <%= @review.communication_rating %>
+</p>
+
+<p>
+  <strong>Service rating:</strong>
+  <%= @review.service_rating %>
+</p>
+
+<p>
+  <strong>Recommend rating:</strong>
+  <%= @review.recommend_rating %>
+</p>
+
+<%= link_to 'Edit', edit_review_path(@review) %> |
+<%= link_to 'Back', reviews_path %>

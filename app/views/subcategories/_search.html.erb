@@ -1,0 +1,13 @@
+<%= search_form_for @search, url: subcategory_path do |f| %>
+
+  <div class="form-group">
+     <%= f.select :processing_time_eq, Gig::PROCESSING_SELECT, {:prompt => "Ready to deliver in..."}, class: "form-control input-sm" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.text_field :user_username_cont, placeholder: "Enter Seller's Name", class: "form-control input-sm" %>
+  </div>
+
+  
+    <%= f.submit "Update", class: "btn btn-sm btn-primary" %> <%= link_to 'Reset', gigs_path, class: "btn btn-sm btn-link" %>
+<% end %>

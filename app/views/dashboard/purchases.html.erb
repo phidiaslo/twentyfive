@@ -1,0 +1,52 @@
+<% title 'Purchases' %>
+<% noindex %>
+<div class="container">
+      <div class="gig-container-alt">
+        <div class="section-divider">
+          <h1>My Purchases</h1>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Seller</th>
+              <th>Item</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          <% @gigs.each do |gig| %>
+            <% @orders.where(gig_id: gig).each do |order| %>
+              <tr>
+                <td>
+                  <%= order.gig.user.username %>
+                  <span class="next-line"><%= link_to "Order ##{order.id}", gig_order_path(gig, order) %></span>
+                </td>
+                <td>
+                  <span class="green-text"><%= order.gig.gig_title %></span>
+                </td>
+                <td><%= order.status %></td>
+                <td>
+                   <%= form_tag edit_order_status_path(id: order) do %>
+                      <% if order.status == 'Pending' %>
+                        Awaiting seller to <span class="green-text">initiate</span> order.
+                      <% elsif order.status == 'In Progress' %>
+                        Awaiting seller to <span class="green-text">deliver</span> order.
+                      <% elsif order.status == 'Delivered' %>
+                        <%= button_tag "Confirm Completion", name: :commit, value: "Delivered", class: "btn btn-status" %>
+                      <% else order.status == 'Completed' %>
+                        <%= button_tag "Leave a review for #{order.gig.user.username}", name: :commit, value: "Completed", class: "btn btn-status full-width" %>
+                      <% end %>
+                   <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      <center><%= paginate @orders %></center>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<% title 'Orders' %>
+<% noindex %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="gig-container-alt">
+        <div class="button-bar">
+          <h1>Orders</h1>
+        </div>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Item</th>
+              <th>Billing Address</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+          <% @gigs.each do |gig| %>
+            <% @orders.where(gig_id: gig).each do |order| %>
+              <tr>
+                <td><%= order.id %></td>
+                <td>
+                  <span class="green-text"><%= order.gig.gig_title %></span>
+                  <span class="next-line"><%= order.remark %></span>
+                </td>
+                <td>
+                  <%= order.name %>
+                  <span class="next-line"><%= order.address_one %></span>
+                  <span class="next-line"><%= order.address_two %></span>
+                  <span class="next-line"><%= order.zipcode %>, <%= order.state%></span>
+                </td>
+                <td>
+                  <%= link_to 'Show', gig_order_path(gig, order) %>
+                  <%= link_to 'Edit', edit_gig_order_path(gig, order) %>
+                  <%= link_to 'Destroy', gig_order_path(gig, order), method: :delete, data: { confirm: 'Are you sure?' } %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      <center><%= paginate @orders %></center>
+      </div>
+    </div>
+    <div class="col-md-3 right-sidebar">
+      <%= render 'dashboard/sidebar' %>
+    </div>
+  </div>
+</div>
+

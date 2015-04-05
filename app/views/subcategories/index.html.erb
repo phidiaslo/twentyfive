@@ -1,0 +1,39 @@
+<% title 'Subcategories' %>
+<% noindex %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="gig-container-alt">
+        <div class="button-bar">
+          <h1>Subcategories<%= link_to 'Add New +', new_subcategory_path, class: "btn btn-smaller btn-success float-right" %></h1>
+        </div>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @subcategories.each do |subcategory| %>
+              <tr>
+                <td><%= subcategory.name %></td>
+                <td><%= subcategory.category.name %></td>
+                <td><%= link_to 'Show', subcategory %></td>
+                <td><%= link_to 'Edit', edit_subcategory_path(subcategory), remote: true %></td>
+                <td><%= link_to 'Destroy', subcategory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+    <div class="col-md-3 right-sidebar">
+      <%= render 'dashboard/sidebar' %>
+    </div>
+  </div>
+</div>
