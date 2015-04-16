@@ -24,7 +24,7 @@
               <tr>
                 <td>
                   <%= link_to "Order ##{customer_order.id}", gig_customer_order_path(gig, customer_order) %>
-                  <span class="next-line"><%= customer_order.purchased_at %></span>
+                  <span class="next-line"><%= local_time_ago(customer_order.created_at, '%d %b %Y at %l:%M %p') %></span>
                 </td>
                 <td>
                   <%= link_to "#{customer_order.gig.gig_title}", gig %>
