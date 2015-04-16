@@ -59,7 +59,7 @@ class CustomerOrdersController < ApplicationController
   def destroy
     @customer_order.destroy
     respond_to do |format|
-      format.html { redirect_to customer_orders_url, notice: 'Customer order was successfully destroyed.' }
+      format.html { redirect_to admin_url, notice: 'Customer order was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
