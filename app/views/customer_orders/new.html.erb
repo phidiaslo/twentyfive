@@ -6,6 +6,7 @@
   </div>
   <div class="gig-container-alt-2">
     <div class="row">
+
     <%= simple_form_for([@gig, @customer_order]) do |f| %>
       <% if @customer_order.errors.any? %>
         <div id="error_explanation">
@@ -53,7 +54,6 @@
 	    <div class="section-divider">
 	    <h3>Buyer Details</h3>
 	    </div>
-
 	       <div class="form-group">
 	         <%= f.input :name, label: "Full Name", placeholder: "John Smith", input_html: {value: "#{current_user.name}", class: "form-control input-sm"} %>
 	       </div>
@@ -80,7 +80,7 @@
 	       </div>
 
 	       <div class="form-group">
-	         <%= f.input :country, label: false, priority: [ "Malaysia" ], input_html: {class: "form-control input-sm"} %>
+	         <%= f.input :country, label: false, priority: [ "Malaysia" ], input_html: {value: "#{current_user.country}", class: "form-control input-sm"} %>
 	       </div>
 
 	       <div class="form-group">
