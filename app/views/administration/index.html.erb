@@ -20,21 +20,21 @@
 
           <tbody>
           <% @gigs.each do |gig| %>
-            <% @customer_orders.where(gig_id: gig).each do |order| %>
+            <% @customer_orders.where(gig_id: gig).each do |customer_order| %>
               <tr>
                 <td>
-                  <%= link_to "Order ##{order.id}", gig_customer_order_path(gig, order) %>
-                  <span class="next-line"><%= order.purchased_at.strftime('%d %b %Y at %l:%M %p') %></span>
+                  <%= link_to "Order ##{order.id}", gig_customer_order_path(gig, customer_order) %>
+                  <span class="next-line"><%= customer_order.purchased_at %></span>
                 </td>
                 <td>
                   <%= link_to "#{order.gig.gig_title}", gig %>
-                  <span class="next-line">Buyer: <%= order.buyer.username %>, Seller: <%= order.seller.username %> </span>
+                  <span class="next-line">Buyer: <%= customer_order.buyer.username %>, Seller: <%= customer_order.seller.username %> </span>
                 </td>
-                <td><%= order.status %></td>
+                <td><%= customer_order.status %></td>
                 <td>
-                  <%= link_to 'Show', gig_customer_order_path(gig, order) %>
-                  <%= link_to 'Edit', edit_gig_customer_order_path(gig, order) %>
-                  <%= link_to 'Destroy', gig_customer_order_path(gig, order), method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <%= link_to 'Show', gig_customer_order_path(gig, customer_order) %>
+                  <%= link_to 'Edit', edit_gig_customer_order_path(gig, customer_order) %>
+                  <%= link_to 'Destroy', gig_customer_order_path(gig, customer_order), method: :delete, data: { confirm: 'Are you sure?' } %>
                 </td>
               </tr>
             <% end %>
