@@ -3,7 +3,7 @@
 <div class="container">
 <div class="col-md-6 col-md-offset-3 panel panel-default">
 <div class="panel-body">
-<div class="section-divider">
+<div class="section-divider center">
 <h1>Edit Profile</h1>
 <p>Tell us a little about yourself.</p>
 </div>
@@ -11,3 +11,20 @@
 </div>
 </div>
 </div>
+
+<script>
+$(document).ready(function(){
+    var preview = $(".avatar-preview img");
+
+    $(".avatar-file").change(function(event){
+       var input = $(event.currentTarget);
+       var file = input[0].files[0];
+       var reader = new FileReader();
+       reader.onload = function(e){
+           image_base64 = e.target.result;
+           preview.attr("src", image_base64);
+       };
+       reader.readAsDataURL(file);
+    });
+});
+</script>

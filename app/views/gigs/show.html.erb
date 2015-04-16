@@ -21,7 +21,7 @@
     
   </div>
   <div class="col-md-4 sidebar-right">
-    <%= link_to 'ORDER NOW (RM 25)', new_gig_order_path(@gig), class: "btn btn-success btn-lg full-width" %>
+    <%= link_to 'ORDER NOW (RM 25)', new_gig_customer_order_path(@gig), class: "btn btn-success btn-lg full-width" %>
     
     <div class="profile-box">
       <%= image_tag @gig.user.avatar(:small), class: "img-circle" %> <span class="green-text"><%= @gig.user.username %></span>

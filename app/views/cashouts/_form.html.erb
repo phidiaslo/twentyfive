@@ -1,0 +1,19 @@
+<%= simple_form_for(@cashout) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-group">
+    <%= f.association :user, required: true, input_html: {class: "input-sm form-control"}%>
+  </div>
+  
+  <div class="form-group">
+    <%= f.input :amount, required: true,input_html: {class: "input-sm form-control"} %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :status, required: true, collection: Cashout::STATUS_SELECT, as: :radio_buttons, item_wrapper_class: "radio-inline" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.button :button, "Submit", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin right-5'></i> Please wait..."} %>
+  </div>
+<% end %>

@@ -57,6 +57,7 @@
 	       <div class="form-group">
 	         <%= f.input :name, label: "Full Name", placeholder: "John Smith", input_html: {value: "#{current_user.name}", class: "form-control input-sm"} %>
 	       </div>
+	         <%= f.hidden_field :email, value: current_user.email %>
 
 	       <div class="form-group">
 	         <%= f.input :address_one, label: "Billing Address", placeholder: "Address Line 1", input_html: {value: "#{current_user.address_one}", class: "form-control input-sm"} %>

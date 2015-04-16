@@ -1,0 +1,49 @@
+<% title 'All Users' %>
+<% noindex %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="gig-container-alt">
+        <div class="button-bar">
+          <h1>Users</h1>
+        </div>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>USER</th>
+              <th>EMAIL</th>
+              <th>ROLE</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+          <% @users.each do |user| %>
+              <tr>
+                <td>
+                  <%= link_to "User ##{user.id}", user %>
+                  <span class="next-line">Registered <%= local_time_ago(user.created_at, '%d %b %Y at %l:%M %p') %></span></td>
+                <td>
+                  <%= link_to "#{user.username}", user %>
+                  <span class="next-line green-text"><%= user.name %></span>
+                </td>
+                <td><%= user.email %></td>
+                <td><%= user.role %></td>
+                <td>
+                  <%= link_to 'Edit', edit_user_path(user) %>
+                  <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      <center><%= paginate @users %></center>
+      </div>
+    </div>
+    <div class="col-md-3 right-sidebar">
+      <%= render 'administration/sidebar' %>
+    </div>
+  </div>
+</div>

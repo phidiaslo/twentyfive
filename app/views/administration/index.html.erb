@@ -1,0 +1,51 @@
+<% title 'All Orders' %>
+<% noindex %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="gig-container-alt">
+        <div class="button-bar">
+          <h1>Orders</h1>
+        </div>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>NUMBER</th>
+              <th>ITEM</th>
+              <th>STATUS</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+          <% @gigs.each do |gig| %>
+            <% @customer_orders.where(gig_id: gig).each do |order| %>
+              <tr>
+                <td>
+                  <%= link_to "Order ##{order.id}", gig_customer_order_path(gig, order) %>
+                  <span class="next-line"><%= local_time_ago(order.purchased_at, '%d %b %Y at %l:%M %p') %></span>
+                </td>
+                <td>
+                  <%= link_to "#{order.gig.gig_title}", gig %>
+                  <span class="next-line">Buyer: <%= order.buyer.username %>, Seller: <%= order.seller.username %> </span>
+                </td>
+                <td><%= order.status %></td>
+                <td>
+                  <%= link_to 'Show', gig_customer_order_path(gig, order) %>
+                  <%= link_to 'Edit', edit_gig_customer_order_path(gig, order) %>
+                  <%= link_to 'Destroy', gig_customer_order_path(gig, order), method: :delete, data: { confirm: 'Are you sure?' } %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      <center><%= paginate @customer_orders %></center>
+      </div>
+    </div>
+    <div class="col-md-3 right-sidebar">
+      <%= render 'administration/sidebar' %>
+    </div>
+  </div>
+</div>

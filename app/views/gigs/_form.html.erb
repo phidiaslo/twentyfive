@@ -12,11 +12,12 @@
   <% end %>
 
   <div class="gig-container-alt-2">
-    <div class="form-group">
-      <%= f.input :featured, label: "Feature this user?", as: :radio_buttons, item_wrapper_class: "radio-inline" %>
+    <% if current_user.role == 'Admin' %>
+    <div class="form-group center">
+      <%= f.input :featured, label: "Feature this service?", as: :radio_buttons, item_wrapper_class: "radio-inline" %>
     </div>
-    <br>
-  
+    <hr>
+    <% end %>
     <div class="form-group">
       <label>Category</label> <small>Choose the closest category</small>
       <%= f.association :category, label: false, collection: @categories, prompt: "Select Type", input_html: {:id => 'categories_select', class: "form-control input-sm"} %>
@@ -51,9 +52,9 @@
         <%= f.fields_for :images do |builder| %>
           <%= render 'image_fields', f: builder %> 
         <% end %>
-        <div class="links">
+        <!--<div class="links">
           <%= link_to_add_association 'Add More Image', f, :images, class: "btn-sm btn-link" %>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>

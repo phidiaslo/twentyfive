@@ -1,0 +1,45 @@
+<% title 'Cashout Requests' %>
+<% noindex %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="gig-container-alt">
+        <div class="button-bar">
+          <h1>Cashout Request<%= link_to 'Create Cashout', new_cashout_path, class: "btn btn-smaller btn-success float-right" %></h1>
+        </div>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>USER</th>
+              <th>AMOUNT</th>
+              <th>STATUS</th>
+              <th colspan="1"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+          <% @cashouts.each do |cashout| %>
+              <tr>
+                <td>
+                  <%= cashout.user.name %>
+                </td>
+                <td>
+                  <span class="green-text"><%= "RM #{number_with_precision(cashout.amount, precision: 2)}" %></span>
+                  <span class="next-line">Requested <%= local_time_ago(cashout.created_at, '%d %b %Y at %l:%M %p') %></span>
+                </td>
+                <td><%= cashout.status %></td>
+                <td class="text-right"><%= link_to 'Edit', edit_cashout_path(cashout) %>
+                <%= link_to 'Destroy', cashout, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      <center><%= paginate @cashouts %></center>
+      </div>
+    </div>
+    <div class="col-md-3 right-sidebar">
+      <%= render 'administration/sidebar' %>
+    </div>
+  </div>
+</div>

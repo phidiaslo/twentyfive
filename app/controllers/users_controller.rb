@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update] # probably want to keep using this
-  #before_action :authenticate_user!
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!, only: [:edit, :update, :destrot] # probably want to keep using this
+  before_filter :verify_seller_admin, only: [:edit, :update, :destroy]
+
  
   # GET /users
   # GET /users.json
@@ -11,19 +13,10 @@ class UsersController < ApplicationController
   # # GET /users/1
   # # GET /users/1.json
   def show
- 
   end
  
   # GET /users/1/edit
   def edit
-    #if current_user.role == 'Admin'
-    #elsif current_user.role == 'Member'
-      if current_user.id != @user.id
-        redirect_to dashboard_url, notice: "Sorry! But the profile that you're trying to access belongs to someone else." 
-      end
-    #else
-    #  redirect_to root_url, notice: "Sorry! But the page that you're trying to access are for members only." 
-    #end 
   end
  
   # # PATCH/PUT /users/1
@@ -39,6 +32,14 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to :back, notice: 'User was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
  
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -49,6 +50,12 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:avatar, :role, :name, :username, :description, :email, :address_one, :address_two, :zipcode, :city, :state, :country)
+    end
+
+    def verify_seller_admin
+      if (current_user != @user) && (current_user.role != 'Admin')
+        redirect_to root_path, alert: "Sorry, the page you're trying to access belongs to someone else."
+      end
     end
  
 end

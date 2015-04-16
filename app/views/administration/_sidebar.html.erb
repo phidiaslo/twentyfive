@@ -1,0 +1,20 @@
+<ul>
+  <li><h5>Daily Administration</h5></li>
+  <li><%= link_to "Cashout Requests", cashouts_path %> <span class="badge"><%= Cashout.where(status: 'Pending').count %></span></li>
+  <br>
+  <li><h5>Manage Databases</h5></li>
+  <li><%= link_to "Orders", admin_path %> <%= "(#{CustomerOrder.all.count})" %></li>
+  <li><%= link_to "Services", manage_services_path %> <%= "(#{Gig.all.count})" %></li>
+  <li><%= link_to "Reviews", reviews_path %> <%= "(#{Review.all.count})" %></li>
+  <li><%= link_to "images", images_path %> <%= "(#{Image.all.count})" %></li>
+  <li><%= link_to "Categories", categories_path %> <%= "(#{Category.all.count})" %></li>
+  <li><%= link_to "Subcategories", subcategories_path %> <%= "(#{Subcategory.all.count})" %></li>
+  <li><%= link_to "Users", users_path %> <%= "(#{User.all.count})" %></li>
+  <li><%= link_to "Payment Notifications", payment_notifications_path %> <%= "(#{PaymentNotification.all.count})" %></li>
+  <br>
+  <li><h5>Admin's Account</h5></li>
+  <li><%= link_to "My Purchases", my_purchases_path %></li>
+  <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
+  <li><%= link_to "Account Settings", edit_user_registration_path %></li>
+  <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+</ul>

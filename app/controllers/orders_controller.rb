@@ -56,26 +56,35 @@ class OrdersController < ApplicationController
   end
 
   def sales
-    @gigs = Gig.where(user_id: current_user)
-    @orders = Order.where(seller_id: current_user).includes(:gig).page(params[:page]).per(20)
+    @gigs = Gig.where(user: current_user)
+    @orders = Order.where(seller: current_user, payment_status: 'Paid').includes(:gig).page(params[:page]).per(20)
+    @pendings = @orders.where(status: 'Pending')
   end
 
   def purchases
     @gigs = Gig.all
-    @orders = Order.where(buyer: current_user ).includes(:gig).page(params[:page]).per(20)
+    @orders = Order.where(buyer: current_user, payment_status: 'Paid').includes(:gig).page(params[:page]).per(20)
+  end
+
+  def earnings
+    @gigs = Gig.where(user: current_user)
+    @orders = Order.where(seller: current_user, status: 'Completed').includes(:gig).page(params[:page]).per(20)
+    @pendings = @orders.where(status: 'Pending')
   end
 
   def edit_order_status
     @order = Order.find(params[:id])
     if params[:commit] == "Pending"
       @order.update(status: "In Progress")
-      @order.send_notification_to_buyer!
+      @order.send_notification_to_buyer
       redirect_to :back, notice: "Status has been succesfully updated to 'In Progress'."
     elsif params[:commit] == "In Progress"
       @order.update(status: "Delivered")
+      @order.send_notification_to_buyer
       redirect_to :back, notice: "Status has been succesfully updated to 'Delivered'."
     else params[:commit] == "Delivered"
-      @order.update(status: "Completed")
+      @order.update(status: "Completed")      
+      @order.send_notification_to_seller
       redirect_to :back, notice: "You have confirmed the completion of this order. Now, you can leave a review to the seller. :)"
     end
   end
@@ -86,6 +95,6 @@ class OrdersController < ApplicationController
     end
 
     def order_params
-      params.require(:order).permit(:name, :address_one, :address_two, :state, :zipcode, :city, :country, :remark, :gig_id, :buyer_id, :seller_id, :remark, :notification_params, :payment_status, :status, :transaction_id, :purchased_at)
+      params.require(:order).permit(:name, :address_one, :address_two, :state, :zipcode, :city, :country, :email, :gig_id, :buyer_id, :seller_id, :remark, :notification_params, :payment_status, :status, :transaction_id, :purchased_at)
     end
 end

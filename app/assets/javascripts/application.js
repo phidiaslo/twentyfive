@@ -18,6 +18,7 @@
 //= require cocoon
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require local_time
 //= require tinymce-jquery
 //= require_tree .
 

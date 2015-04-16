@@ -1,19 +1,20 @@
-<% title 'Manage Sales' %>
+<% title 'Manage Orders' %>
 <% noindex %>
 <div class="container">
   <div class="row">
     <div class="col-md-9">
       <div class="gig-container-alt">
         <div class="button-bar">
-          <h1>Sales</h1>
+          <h1>Manage Orders</h1>
         </div>
 
         <table class="table">
           <thead>
             <tr>
-              <th>Buyer</th>
-              <th>Item</th>
-              <th>Status</th>
+              <th>DATE</th>
+              <th>BUYER</th>
+              <th>SERVICE</th>
+              <th>STATUS</th>
               <th></th>
             </tr>
           </thead>
@@ -23,11 +24,14 @@
             <% @orders.where(gig_id: gig).each do |order| %>
               <tr>
                 <td>
-                  <%= order.name %>
-                  <span class="next-line"><%= link_to "Order ##{order.id}", gig_order_path(gig, order) %></span>
+                  <%= link_to "Order ##{order.id}", gig_order_path(gig, order) %>
+                  <span class="next-line"><%= order.purchased_at.strftime("%b %e, %Y") %></span>
                 </td>
                 <td>
-                  <span class="green-text"><%= order.gig.gig_title %></span>
+                  <%= link_to "#{order.gig.user.username}", user_path(order.buyer), target: "_blank" %>
+                </td>
+                <td>
+                  <span><%= link_to "#{order.gig.gig_title}", gig, target: "_blank" %></span>
                 </td>
                 <td><%= order.status %></td>
                 <td>
@@ -39,7 +43,7 @@
                       <% elsif order.status == 'Delivered' %>
                         Awaiting Confirmation
                       <% else order.status == 'Completed' %>
-                        Awaiting Buyer Review
+                        Awaiting Buyer's <span class="green-text">Review</span>
                       <% end %>
                    <% end %>
                 </td>

@@ -11,20 +11,26 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>Gig</th>
-              <th>Graphic</th>
-              <th colspan="3"></th>
+              <th>GIG ID #</th>
+              <th>BELONGS TO</th>
+              <th>GRAPHIC</th>
+              <th></th>
             </tr>
           </thead>
 
           <tbody>
             <% @images.each do |image| %>
               <tr>
-                <td><%= image.gig_id %></td>
+                <td>
+                   <%= "##{image.gig.id}" %>
+                   <span class="next-line">Created <%= local_time_ago(image.created_at, '%d %b %Y at %l:%M %p') %></span>
+                </td>
+                <td>
+                  <%= link_to image.gig.gig_title, gig_path(image.gig_id) %>
+                </td>
                 <td><%= image_tag image.graphic.url(:thumb) %></td>
-                <td><%= link_to 'Show', image %></td>
-                <td><%= link_to 'Edit', edit_image_path(image) %></td>
-                <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td class="text-right"><%= link_to 'Edit', edit_image_path(image) %>
+                <%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
             <% end %>
           </tbody>
@@ -33,7 +39,7 @@
       </div>
     </div>
     <div class="col-md-3 right-sidebar">
-      <%= render 'dashboard/sidebar' %>
+      <%= render 'administration/sidebar' %>
     </div>
   </div>
 </div>

@@ -80,6 +80,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
+    excon (0.45.1)
     execjs (2.4.0)
     flexslider (2.2.0)
       sass-rails (>= 3.1.0)
@@ -111,10 +112,15 @@ GEM
     lazybox (1.1.5)
     letter_opener (1.3.0)
       launchy (~> 2.2)
+    local_time (1.0.2)
+      coffee-rails
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    mandrill-api (1.0.53)
+      excon (>= 0.16.0, < 1.0)
+      json (>= 1.7.7, < 2.0)
     meta-tags (2.0.0)
       actionpack (>= 3.0.0)
     mime-types (2.4.3)
@@ -245,6 +251,8 @@ DEPENDENCIES
   kaminari
   lazybox
   letter_opener
+  local_time (~> 1.0.2)
+  mandrill-api (~> 1.0.53)
   meta-tags
   momentjs-rails (>= 2.8.1)
   owlcarousel-rails

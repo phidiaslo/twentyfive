@@ -1,11 +1,10 @@
 class ImagesController < ApplicationController
-  before_action :set_image, only: [:show, :edit, :update, :destroy]
+  before_action :set_image, only: [:edit, :update, :destroy]
+  before_filter :authenticate_user!, only: [:index, :edit, :destroy]
+  before_filter :verify_admin, only: [:index, :edit, :destroy]
 
   def index
-    @images = Image.all.order('created_at DESC').page(params[:page]).per(10)
-  end
-
-  def show
+    @images = Image.all.order('created_at DESC').includes(:gig).page(params[:page]).per(10)
   end
 
   def new
@@ -56,5 +55,11 @@ class ImagesController < ApplicationController
 
     def image_params
       params.require(:image).permit(:gig_id, :graphic)
+    end
+
+    def verify_admin
+      if current_user.role != 'Admin'
+        redirect_to root_url, alert: "Sorry, but you're not allowed access to this page."
+      end
     end
 end

@@ -1,7 +1,7 @@
 class SubcategoriesController < ApplicationController
   before_action :set_subcategory, only: [:show, :edit, :update, :destroy]
-
-  #respond_to :html
+  before_filter :authenticate_user!, only: [:index, :new, :edit, :create, :update, :destroy]
+  before_filter :verify_admin, only: [:index, :new, :edit, :create, :update, :destroy]
 
   def index
     @subcategories = Subcategory.all.includes(:category)
@@ -60,5 +60,11 @@ class SubcategoriesController < ApplicationController
 
     def subcategory_params
       params.require(:subcategory).permit(:name, :category_id, :slug)
+    end
+
+    def verify_admin
+      if current_user.role != 'Admin'
+        redirect_to root_url, alert: "Sorry, but you're not allowed access to this page."
+      end
     end
 end

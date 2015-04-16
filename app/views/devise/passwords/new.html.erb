@@ -1,15 +1,26 @@
-<h2>Forgot your password?</h2>
+<% title 'Forgot Password' %>
+<% noindex %>
+<div class="container">
+<div class="col-md-6 col-md-offset-3 panel panel-default margin-top-40">
+  <div class="panel-body">
+    <div class="section-divider">
+      <h1>Forgot Your Password?</h1>
+      <p>Enter your email address for us to send you the reset instructions.</p>
+    </div>
 
 <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+  <div class="form-group">
+    <%= f.input :email, required: true, input_html: {class: "form-control input-sm"} %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Send me reset password instructions" %>
+  <div class="form-group">
+    <%= f.button :button, "Send me reset password instructions", class: "btn btn-smaller btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin right-5'></i> Please wait..."} %>
   </div>
 <% end %>
-
 <%= render "devise/shared/links" %>
+
+</div>
+</div>
+</div>

@@ -1,6 +1,8 @@
 class GigsController < ApplicationController
   include GigsHelper
   before_action :set_gig, only: [:show, :edit, :update, :destroy]
+  before_filter :verify_seller_admin, only: [:edit, :update, :destroy]
+
 
   #respond_to :html
 
@@ -43,7 +45,7 @@ class GigsController < ApplicationController
   def new
     @gig = Gig.new
     
-    3.times do
+    6.times do
       @gig.images.build
     end
     
@@ -57,8 +59,10 @@ class GigsController < ApplicationController
   end
 
   def edit
-    #@gig = Gig.find(params[:id])
-    #3.times {@gig.images.build}
+    image_number = 6 - @gig.images.size
+    image_number.times do
+    @gig.images.build
+    end
   end
 
   def create
@@ -147,5 +151,11 @@ class GigsController < ApplicationController
 
     def gig_params
       params.require(:gig).permit(:gig_title, :featured, :category, :description, :duration, :processing_time, :cover, :video, :slug, :category_id, :subcategory_id, images_attributes: [ :id, :graphic ], subcategories_attributes: [ :id, :name, :category_id])
+    end
+
+    def verify_seller_admin
+      if (current_user != @gig.user) && (current_user.role != 'Admin')
+        redirect_to root_url, alert: "Sorry, the page you're trying to access belongs to someone else."
+      end
     end
 end

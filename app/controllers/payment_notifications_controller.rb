@@ -21,7 +21,7 @@ class PaymentNotificationsController < ApplicationController
   end
 
   def create
-    PaymentNotification.create!(:params => params, :order_id => params[:invoice], :status => params[:payment_status], :transaction_id => params[:txn_id])
+    PaymentNotification.create!(:params => params, :customer_order_id => params[:invoice], :order_id => params[:invoice], :status => params[:payment_status], :transaction_id => params[:txn_id])
     render :nothing => true
   end
 
@@ -41,6 +41,6 @@ class PaymentNotificationsController < ApplicationController
     end
 
     def payment_notification_params
-      params.require(:payment_notification).permit(:params, :order_id, :status, :transaction_id, :create)
+      params.require(:payment_notification).permit(:params, :customer_order_id, :order_id, :status, :transaction_id, :create)
     end
 end

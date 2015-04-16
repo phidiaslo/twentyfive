@@ -11,12 +11,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150128173427) do
+ActiveRecord::Schema.define(version: 20150415180329) do
+
+  create_table "cashouts", force: :cascade do |t|
+    t.decimal  "amount",     precision: 10, scale: 2
+    t.integer  "user_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "status"
+  end
+
+  add_index "cashouts", ["user_id"], name: "index_cashouts_on_user_id"
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "customer_orders", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address_one"
+    t.string   "address_two"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.string   "country"
+    t.string   "email"
+    t.text     "remarks"
+    t.integer  "gig_id"
+    t.integer  "buyer_id"
+    t.integer  "seller_id"
+    t.string   "payment_status"
+    t.text     "notification_params"
+    t.string   "status"
+    t.string   "transaction_id"
+    t.datetime "purchased_at"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -91,10 +123,11 @@ ActiveRecord::Schema.define(version: 20150128173427) do
   create_table "payment_notifications", force: :cascade do |t|
     t.text     "params"
     t.integer  "order_id"
-    t.string   "status",         limit: 255
-    t.string   "transaction_id", limit: 255
+    t.string   "status",            limit: 255
+    t.string   "transaction_id",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "customer_order_id"
   end
 
   create_table "reviews", force: :cascade do |t|

@@ -1,5 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!, only: [:index, :new, :edit, :create, :update, :destroy]
+  before_filter :verify_admin, only: [:index, :new, :edit, :create, :update, :destroy]
 
   #respond_to :html
 
@@ -63,4 +65,13 @@ class CategoriesController < ApplicationController
     def category_params
       params.require(:category).permit(:name)
     end
+
+    def verify_admin
+      if current_user.role != 'Admin'
+        redirect_to root_url, alert: "Sorry, but you're not allowed access to this page."
+      end
+    end
 end
+
+
+  

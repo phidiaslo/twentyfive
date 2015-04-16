@@ -12,4 +12,9 @@ class User < ActiveRecord::Base
   has_many :gigs
   has_many :sales, class_name: "Order", foreign_key: "seller_id"
   has_many :purchases, class_name: "Order", foreign_key: "buyer_id"
+
+  has_many :sales, class_name: "CustomerOrder", foreign_key: "seller_id"
+  has_many :purchases, class_name: "CustomerOrder", foreign_key: "buyer_id"
+
+  ROLE_SELECT = ['Member', 'Admin', 'Accountant', 'Super Admin']
 end

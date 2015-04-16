@@ -1,0 +1,52 @@
+<% title 'View Incomes' %>
+<% noindex %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="gig-container-alt">
+        <div class="button-bar">
+          <h1>Earnings</h1>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>DATE</th>
+              <th>BUYER</th>
+              <th>SERVICE</th>
+              <th>STATUS</th>
+              <th>EARNED</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          <% @gigs.each do |gig| %>
+            <% @orders.where(gig_id: gig).each do |order| %>
+              <tr>
+                <td>
+                  <%= link_to "Order ##{order.id}", gig_order_path(gig, order) %>
+                  <span class="next-line"><%= order.purchased_at.strftime("%b %e, %Y") %></span>
+                </td>
+                <td>
+                  <%= link_to "#{order.gig.user.username}", user_path(order.buyer), target: "_blank" %>
+                </td>
+                <td>
+                  <span><%= link_to "#{order.gig.gig_title}", gig, target: "_blank" %></span>
+                </td>
+                <td><%= order.status %></td>
+                <td>
+                   <span class="green-text">RM20.00</span>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      <center><%= paginate @orders %></center>
+      </div>
+    </div>
+    <div class="col-md-3 right-sidebar">
+      <%= render 'dashboard/sidebar' %>
+    </div>
+  </div>
+</div>

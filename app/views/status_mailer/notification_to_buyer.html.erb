@@ -1,3 +1,75 @@
-<h1>Your order status is now <%= @order.status %></h1>
-
+<table cellspacing="0" cellpadding="0" style="padding:30px 10px;background:#eee;width:100%;font-family:arial">
+  <tbody>
+	<tr>
+	  <td>
+		<table align="center" cellspacing="0" style="max-width:650px;min-width:320px">
+		  <tbody>
+			<tr>
+			  <td align="center" style="background:#fff;border:1px solid #e4e4e4;padding:50px 30px">
+				<table align="center">
+				  <tbody>
+					<tr>
+					  <td style="border-bottom:1px solid #dfdfd0;color:#666;text-align:center;padding-bottom:30px">				
+						<table align="center" style="margin:auto">
+						  <tbody>
+                            <tr>
+							  <td style="color:#666;font-size:20px;font-weight:bold;text-align:center;font-family:arial">
+							    <%= @order.buyer.username %> changed your order status to '<%= @order.status %>'	
+							  </td>
+							</tr>
+						  </tbody>
+						</table>						
+						<table align="center" style="margin:auto">
+						  <tbody>
+							<tr>
+							  <td style="color:#666;font-size:16px;padding-bottom:30px;text-align:center;font-family:arial">
+								This seller is working on your request.
+							  </td>
+							</tr>
+						  </tbody>
+						</table>
+						<table align="center" style="margin:auto">
+						  <tbody>
+							<tr>
+							  <td style="background-color:#00b22d;border:1px solid #028a25;border-radius:3px;text-align:center">
+								<a href="http://localhost:3000/purchases" style="padding:16px 20px;display:block;text-decoration:none;color:#fff;font-size:16px;text-align:center;font-family:arial;font-weight:bold" target="_blank">VIEW YOUR ORDER</a>
+							  </td>
+							</tr>
+						  </tbody>
+						</table>
+					  </td>
+				    </tr>
+				    <tr>
+					  <td style="color:#aaa;padding:15px;font-size:11px;line-height:15px;text-align:left">
+						<div style="color:#aaa;padding-bottom:15px;font-family:arial">
+						  If clicking the link above does not work, copy and paste the following URL in a new browser window: <a href="http://localhost:3000/purchases" style="color:#00b22c" target="_blank">http://localhost:3000/purchases</a>
+						</div>
+						<div style="color:#aaa;font-family:arial">
+							It is also a good idea to add <a style="color:#aaa">no-reply@twentyfive.my</a> to your address book to ensure that you receive our messages (no spam, we promise!).
+						</div>
+					  </td>
+				    </tr>
+			      </tbody>
+		        </table>
+			  </td>
+			</tr>
+    	  </tbody>
+		</table>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+		<table align="center" style="max-width:650px">
+		  <tbody>
+		    <tr>
+			  <td style="color:#666666;font-size:11px;padding-top:10px;line-height:15px;font-family:arial">
+				© 2015 www.TwentyFive.com - All Rights Reserved. Made with <span style="color:#CC0000;font-size:20px;">♥</span> in Kota Kinabalu.
+			  </td>
+			</tr>
+		  </tbody>
+		</table>
+	  </td>
+	</tr>
+  </tbody>
+</table>
 
