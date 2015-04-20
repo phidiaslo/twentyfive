@@ -37,7 +37,7 @@
                       <% elsif order.status == 'Delivered' %>
                         <%= button_tag "Confirm Completion", name: :commit, value: "Delivered", class: "btn btn-status full-width" %>
                       <% else order.status == 'Completed' %>
-                        <%= button_tag "Leave a review for #{order.seller.username}", name: :commit, value: "Completed", class: "btn btn-status full-width" %>
+                        <%= link_to "Leave a review for #{order.seller.username}", new_review_path, class: "btn btn-status full-width" %>
                       <% end %>
                    <% end %>
                 </td>

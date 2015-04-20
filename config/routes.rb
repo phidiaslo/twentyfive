@@ -23,11 +23,6 @@ Rails.application.routes.draw do
   match 'edit_customer_order_status' => "customer_orders#edit_customer_order_status", via: :post
   ###################
   
-  get 'purchases' => "orders#purchases"
-  get 'sales' => "orders#sales"
-  get 'earnings' => "orders#earnings"
-  match 'edit_order_status' => "orders#edit_order_status", via: :post
-
   resources :reviews
 
   resources :images
@@ -36,7 +31,6 @@ Rails.application.routes.draw do
 
   resources :subcategories
      
-  #devise_for :users, :controllers => { :registrations => :registrations }
   devise_for :users
 
   resources :users, only: [:index, :show, :edit, :update, :destroy]

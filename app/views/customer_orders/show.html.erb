@@ -1,13 +1,14 @@
 <% title "Order ##{@customer_order.id}" %>
 <div class="container">
-  <div class="page-title">
+  <div class="page-title center">
     <h1><strong>Order #<%= @customer_order.id %></strong></h1>
+    <p>Purchased <%= local_time_ago(@customer_order.purchased_at, '%d %b %Y at %l:%M %p') %></p>
   </div>
   <div class="gig-container-alt-2">
     <div class="row">
     <div class="col-md-6">
       <div class="section-divider">
-      <h3>Item Details</h3>
+      <h3>Order Details</h3>
       </div>
       
       <table class="table table-bordered">
@@ -38,7 +39,7 @@
     </div>
     <div class="col-md-6" style="border-left: 1px dotted #cecece;">
       <div class="section-divider">
-      <h3>Order Details</h3>
+      <h3>Users Information</h3>
       </div>
       <table class="table table-bordered">
         <thead>
