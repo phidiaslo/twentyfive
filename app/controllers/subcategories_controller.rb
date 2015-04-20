@@ -8,8 +8,8 @@ class SubcategoriesController < ApplicationController
   end
 
   def show
-    @gigs = Gig.where(subcategory_id: @subcategory).order('view_count DESC')
-    @gigs = @search.result(distinct: true).page(params[:page]).per(1).includes(:user)
+    @subgigs = Gig.where(subcategory_id: @subcategory, status: 'Active').includes(:user).order('view_count DESC')
+    @gigs = @search.result(distinct: true).page(params[:page]).per(20).includes(:user)
     @images = Image.all.order('created_at DESC')
   end
 

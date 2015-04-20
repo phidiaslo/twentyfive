@@ -4,8 +4,6 @@ class GigsController < ApplicationController
   before_filter :verify_seller_admin, only: [:edit, :update, :destroy]
 
 
-  #respond_to :html
-
   def index
     @gigs = Gig.all.page(params[:page]).per(20)
     @gigs = @search.result(distinct: true).page(params[:page]).per(20)
@@ -68,7 +66,7 @@ class GigsController < ApplicationController
   def create
     @gig = Gig.new(gig_params)
     @gig.user_id = current_user.id
-    @gig.status = 'Pending Approval'
+    @gig.status = 'Active'
 
     respond_to do |format|
       if @gig.save
@@ -106,43 +104,39 @@ class GigsController < ApplicationController
   end
 
   def edit_individual
-    #@gigs = Gig.find(params[:gig_ids])
+    @gigs = Gig.find(params[:gig_ids])
 
     if params[:commit] == 'Delete'
-      @gigs = Gig.find(params[:gig_ids])
       @gigs.each { |gig|
         Gig.destroy(gig.id)  }
     elsif params[:commit] == 'Activate'
-      @gigs = Gig.find(params[:gig_ids])
       @gigs.each { |gig|
-        if gig.status == 'Pending Approval'
-        else
-          gig.status = 'Active'
-          gig.save 
-        end
-      }
-    else params[:commit] == 'Suspend'
-      @gigs = Gig.find(params[:gig_ids])
+        gig.status = 'Active'
+        gig.save 
+      } 
+    elsif params[:commit] == 'Deactivate'
       @gigs.each { |gig|
-        if gig.status == 'Pending Approval'
-        else
-          gig.status = 'Suspended'
-          gig.save 
-        end
+        gig.status = 'Inactive'
+        gig.save 
       }
+    else params[:commit] == 'Ban'
+        @gigs.each { |gig|
+          gig.status = 'Banned'
+          gig.save 
+        }
     end
     redirect_to :back
   end
 
-  def update_individual
-    @gigs = Gig.update(params[:gigs].keys, params[:gigs].values).reject { |p| p.errors.empty? }
-        if @gigs.empty?
-          flash[:notice] = "Gigs updated"
-          redirect_to offers_path
-        else
-          render :action => "edit_individual"
-        end
-  end
+  #def update_individual
+  #  @gigs = Gig.update(params[:gigs].keys, params[:gigs].values).reject { |p| p.errors.empty? }
+  #      if @gigs.empty?
+  #       flash[:notice] = "Gigs updated"
+  #        redirect_to offers_path
+  #      else
+  #        render :action => "edit_individual"
+  #     end
+  #end
 
   private
     def set_gig
@@ -150,7 +144,7 @@ class GigsController < ApplicationController
     end
 
     def gig_params
-      params.require(:gig).permit(:gig_title, :featured, :category, :description, :duration, :processing_time, :cover, :video, :slug, :category_id, :subcategory_id, images_attributes: [ :id, :graphic ], subcategories_attributes: [ :id, :name, :category_id])
+      params.require(:gig).permit(:gig_title, :featured, :category, :description, :duration, :processing_time, :cover, :video, :admin_disable, :slug, :category_id, :subcategory_id, images_attributes: [ :id, :graphic ], subcategories_attributes: [ :id, :name, :category_id])
     end
 
     def verify_seller_admin

@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "80x80>", :small => "50x50>", :xs => "24x24>" }, :default_url => "default-user-icon.png"
+  has_attached_file :avatar, :styles => { :thumb => "80x80>", :small => "50x50>", :xs => "24x24>" }, :default_url => "default-user-icon.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   validates :username, presence: true, format: { with: /\A[a-zA-Z0-9]+\Z/ }

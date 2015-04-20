@@ -19,26 +19,23 @@
           </thead>
 
           <tbody>
-          <% @gigs.each do |gig| %>
-            <% @customer_orders.where(gig_id: gig).each do |customer_order| %>
+            <% @customer_orders.each do |customer_order| %>
               <tr>
                 <td>
-                  <%= link_to "Order ##{customer_order.id}", gig_customer_order_path(gig, customer_order) %>
-                  <span class="next-line"><%= local_time_ago(customer_order.created_at, '%d %b %Y at %l:%M %p') %></span>
+                  <%= link_to "Order ##{customer_order.id}", gig_customer_order_path(customer_order.seller, customer_order) %>
+                  <span class="next-line">Ordered <%= local_time_ago(customer_order.created_at, '%d %b %Y at %l:%M %p') %></span>
                 </td>
                 <td>
-                  <%= link_to "#{customer_order.gig.gig_title}", gig %>
-                  <span class="next-line">Buyer: <%= customer_order.buyer.username %>, Seller: <%= customer_order.seller.username %> </span>
+                  <%= link_to "#{customer_order.gig.gig_title}", gig_path(customer_order.gig) %>
+                  <span class="next-line">Buyer: <%= link_to customer_order.buyer.username, user_path(customer_order.buyer), target: "_blank", class: "green-text font-10" %>, Seller: <%= link_to customer_order.seller.username, user_path(customer_order.seller), target: "_blank", class: "green-text font-10" %> </span>
                 </td>
                 <td><%= customer_order.status %></td>
                 <td>
-                  <%= link_to 'Show', gig_customer_order_path(gig, customer_order) %>
-                  <%= link_to 'Edit', edit_gig_customer_order_path(gig, customer_order) %>
-                  <%= link_to 'Destroy', gig_customer_order_path(gig, customer_order), method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <%= link_to 'Edit', edit_gig_customer_order_path(customer_order.gig, customer_order) %>
+                  <%= link_to 'Delete', gig_customer_order_path(customer_order.gig, customer_order), method: :delete, data: { confirm: 'Are you sure?' } %>
                 </td>
               </tr>
             <% end %>
-          <% end %>
           </tbody>
         </table>
       <center><%= paginate @customer_orders %></center>

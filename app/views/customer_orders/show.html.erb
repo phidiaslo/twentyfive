@@ -1,91 +1,76 @@
+<% title "Order ##{@customer_order.id}" %>
 <div class="container">
-<p id="notice"><%= notice %></p>
+  <div class="page-title">
+    <h1><strong>Order #<%= @customer_order.id %></strong></h1>
+  </div>
+  <div class="gig-container-alt-2">
+    <div class="row">
+    <div class="col-md-6">
+      <div class="section-divider">
+      <h3>Item Details</h3>
+      </div>
+      
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ITEM</th>
+            <th>PRICE</th>
+          </tr>
+        </thead>
 
-<p>
-  <strong>Name:</strong>
-  <%= @customer_order.name %>
-</p>
+        <tbody>
+            <tr>
+              <td><%= @customer_order.gig.gig_title %></td>
+              <td>RM 25.00</td>
+            </tr>
+            <tr>
+              <td>Coffee for our developers :)</td>
+              <td>RM 3.50</td>
+            </tr>
+        </tbody>
+      </table>
 
-<p>
-  <strong>Address one:</strong>
-  <%= @customer_order.address_one %>
-</p>
+      <h3 class="green-text" style="text-align:right;">Total: RM 28.50</h3>
+       
+      <div class="remark-box">
+        
+      </div>
+    </div>
+    <div class="col-md-6" style="border-left: 1px dotted #cecece;">
+      <div class="section-divider">
+      <h3>Order Details</h3>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>BUYER</th>
+            <th>SELLER</th>
+          </tr>
+        </thead>
 
-<p>
-  <strong>Address two:</strong>
-  <%= @customer_order.address_two %>
-</p>
+        <tbody>
+            <tr>
+              <td><%= link_to @customer_order.buyer.username, user_path(@customer_order.buyer), class: "green-text" %><span class="next-line"><%= mail_to @customer_order.email %></span></td>
+              <td><%= link_to @customer_order.seller.username, user_path(@customer_order.seller), class: "green-text" %><span class="next-line"><%= mail_to @customer_order.seller.email %></span></td>
+            </tr>
+            <tr>
+              <td>
+                <%= @customer_order.address_one %>,
+                <%= @customer_order.address_two %>,
+                <%= @customer_order.zipcode %> <%= @customer_order.city %>,
+                <%= @customer_order.state %>, <%= @customer_order.country %>
+              </td>
+              <td>
+                <%= @customer_order.seller.address_one %>,
+                <%= @customer_order.seller.address_two %>,
+                <%= @customer_order.seller.zipcode %> <%= @customer_order.seller.city %>,
+                <%= @customer_order.seller.state %>, <%= @customer_order.seller.country %>
+              </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
-<p>
-  <strong>City:</strong>
-  <%= @customer_order.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @customer_order.state %>
-</p>
-
-<p>
-  <strong>Zipcode:</strong>
-  <%= @customer_order.zipcode %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @customer_order.country %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @customer_order.email %>
-</p>
-
-<p>
-  <strong>Remarks:</strong>
-  <%= @customer_order.remarks %>
-</p>
-
-<p>
-  <strong>Gig:</strong>
-  <%= @customer_order.gig_id %>
-</p>
-
-<p>
-  <strong>Buyer:</strong>
-  <%= @customer_order.buyer_id %>
-</p>
-
-<p>
-  <strong>Seller:</strong>
-  <%= @customer_order.seller_id %>
-</p>
-
-<p>
-  <strong>Payment status:</strong>
-  <%= @customer_order.payment_status %>
-</p>
-
-<p>
-  <strong>Notification params:</strong>
-  <%= @customer_order.notification_params %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @customer_order.status %>
-</p>
-
-<p>
-  <strong>Transaction:</strong>
-  <%= @customer_order.transaction_id %>
-</p>
-
-<p>
-  <strong>Purchased at:</strong>
-  <%= @customer_order.purchased_at %>
-</p>
-
-<%= link_to 'Edit', edit_customer_order_path(@customer_order) %> |
-<%= link_to 'Back', customer_orders_path %>
+    </div>
+  </div>    
 </div>

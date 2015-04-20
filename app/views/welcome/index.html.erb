@@ -10,11 +10,11 @@
       <h3><strong>FEATURED SERVICES</strong></h3>
       <h4>Noteworthy Professionals</h4>
   </center>
-  <% @gigs.each do |gig| %>
+  <% @gigs.find_each do |gig| %>
     <div class="col-md-3">
       <div class="thumbnail">
           <% @images.where(gig_id: gig).first(1).each do |image| %>
-            <%= link_to image_tag(image.graphic.url), gig %>
+            <%= link_to image_tag(image.graphic.url(:medium)), gig %>
           <% end %>
           <div class="caption">
           <h4><%= link_to "#{gig.gig_title}", gig %></h4>

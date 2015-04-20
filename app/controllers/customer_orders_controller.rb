@@ -66,18 +66,18 @@ class CustomerOrdersController < ApplicationController
 
   def sales
     @gigs = Gig.where(user: current_user)
-    @customer_orders = CustomerOrder.where(seller: current_user, payment_status: 'Paid').includes(:gig, :buyer).page(params[:page]).per(20)
+    @customer_orders = CustomerOrder.where(seller: current_user, payment_status: 'Paid').includes(:gig, :buyer).order('created_at DESC').page(params[:page]).per(20)
     @pendings = @customer_orders.where(status: 'Pending')
   end
 
   def purchases
     @gigs = Gig.all
-    @customer_orders = CustomerOrder.where(buyer: current_user, payment_status: 'Paid').order('purchased_at DESC').includes(:gig, :seller).page(params[:page]).per(20)
+    @customer_orders = CustomerOrder.where(buyer: current_user, payment_status: 'Paid').includes(:gig, :buyer, :seller).order('purchased_at DESC').page(params[:page]).per(20)
   end
 
   def earnings
     @gigs = Gig.where(user: current_user)
-    @customer_orders = CustomerOrder.where(seller: current_user, status: 'Completed').includes(:gig).page(params[:page]).per(20)
+    @customer_orders = CustomerOrder.where(seller: current_user, status: 'Completed').includes(:gig, :seller).order('purchased_at DESC').page(params[:page]).per(20)
     @pendings = @customer_orders.where(status: 'Pending')
   end
 

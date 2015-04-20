@@ -24,11 +24,10 @@ gem "cocoon"
 gem 'flexslider'
 gem 'meta-tags'
 gem 'country_select'
-#gem 'dot_secrets', github: 'rono23/dot_secrets'
 gem 'font-awesome-sass', '~> 4.2.0'
-#gem 'rack-mini-profiler'
 gem 'mandrill-api', '~> 1.0.53', require: "mandrill"
 gem 'local_time', '~> 1.0.2'
+gem 'aws-sdk', '< 2.0'
 
 gem 'coffee-script-source', '1.8.0'
 

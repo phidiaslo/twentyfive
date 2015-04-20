@@ -6,11 +6,12 @@
 	<div class="gig-container-alt">
 	<%= form_tag edit_individual_gigs_path do %>
 	  <div class="button-bar">
-		  <div>
-	        <%= submit_tag "Suspend", class: "btn btn-default" %>
-	        <%= submit_tag "Activate", class: "btn btn-default" %>
+         <h1>My Services</h1>
+         <hr>
+	        <%= submit_tag "Activate", class: "btn btn-smaller btn-success" %>
+	        <%= submit_tag "Deactivate", class: "btn btn-default" %>
 	        <%= link_to "Add New Service", new_gig_path, class: "btn btn-smaller btn-success float-right" %>
-	      </div>
+
       </div>
 	<table class="table">
 	  <thead>
@@ -25,7 +26,9 @@
 	  <tbody>
 	    <% @gigs.each do |gig| %>
 	      <tr>
-	        <td><%= check_box_tag "gig_ids[]", gig.id %></td>
+	        <td>
+	          <%= check_box_tag "gig_ids[]", gig.id if gig.status != 'Banned' %>
+	        </td>
 	        <td>
 	          <%= link_to "#{gig.gig_title}", gig %>
 	          <span class="next-line">Created <%= local_time_ago(gig.created_at, '%d %b %Y at %l:%M %p') %></span>

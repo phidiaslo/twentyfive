@@ -6,12 +6,13 @@
   <div class="gig-container-alt">
   <%= form_tag edit_individual_gigs_path do %>
     <div class="button-bar">
-      <div>
-          <%= submit_tag "Suspend", class: "btn btn-default" %>
+       <h1>Services</h1>
+         <hr>
           <%= submit_tag "Activate", class: "btn btn-default" %>
+          <%= submit_tag "Deactivate", class: "btn btn-default" %>
+          <%= submit_tag "Ban", class: "btn btn-default" %>
           <%= submit_tag "Delete", class: "btn btn-default" %>
           <%= link_to "Add New Service", new_gig_path, class: "btn btn-smaller btn-success float-right" %>
-        </div>
       </div>
   <table class="table">
     <thead>

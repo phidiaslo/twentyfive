@@ -28,7 +28,7 @@
         <%= sort_link @search, :view_count, "Most Viewed", default_order: :desc %>
         <%= sort_link @search, :id, "High Rating", default_order: :desc %>
       </div>
-      <% @gigs.where(subcategory_id: @subcategory).each do |gig| %>
+      <% @subgigs.each do |gig| %>
         <div class="col-md-4">
           <div class="thumbnail">
               <% @images.where(gig_id: gig).first(1).each do |image| %>

@@ -10,7 +10,6 @@
           <thead>
             <tr>
               <th>DATE</th>
-              <th>SELLER</th>
               <th>ITEM</th>
               <th>STATUS</th>
               <th></th>
@@ -18,16 +17,15 @@
           </thead>
 
           <tbody>
-          <% @gigs.each do |gig| %>
-            <% @customer_orders.where(gig_id: gig).each do |order| %>
+            <% @customer_orders.each do |order| %>
               <tr>
                 <td>
-                  <%= link_to "Order ##{order.id}", gig_customer_order_path(gig, order) %>
+                  <%= link_to "Order ##{order.id}", gig_customer_order_path(current_user, order) %>
                   <span class="next-line"><%= local_time_ago(order.purchased_at, '%d %b %Y at %l:%M %p') %></span>
                 </td>
-                <td><%= link_to "#{order.gig.user.username}", user_path(order.seller), target: "_blank" %></td>
                 <td>
-                  <span><%= link_to "#{order.gig.gig_title}", gig, target: "_blank" %></span>
+                  <%= link_to "#{order.gig.gig_title}", gig_path(order.seller), target: "_blank" %>
+                  <span class="next-line">Buyer: <%= link_to "#{order.buyer.username}", user_path(order.buyer), target: "_blank", class: "green-text font-10" %></span> 
                 </td>
                 <td><%= order.status %></td>
                 <td>
@@ -39,13 +37,13 @@
                       <% elsif order.status == 'Delivered' %>
                         <%= button_tag "Confirm Completion", name: :commit, value: "Delivered", class: "btn btn-status full-width" %>
                       <% else order.status == 'Completed' %>
-                        <%= button_tag "Leave a review for #{order.gig.user.username}", name: :commit, value: "Completed", class: "btn btn-status full-width" %>
+                        <%= button_tag "Leave a review for #{order.seller.username}", name: :commit, value: "Completed", class: "btn btn-status full-width" %>
                       <% end %>
                    <% end %>
                 </td>
               </tr>
             <% end %>
-          <% end %>
+      
           </tbody>
         </table>
       <center><%= paginate @customer_orders %></center>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415180329) do
+ActiveRecord::Schema.define(version: 20150416155853) do
 
   create_table "cashouts", force: :cascade do |t|
     t.decimal  "amount",     precision: 10, scale: 2
@@ -97,6 +97,8 @@ ActiveRecord::Schema.define(version: 20150415180329) do
     t.integer  "graphic_file_size"
     t.datetime "graphic_updated_at"
   end
+
+  add_index "images", ["gig_id"], name: "index_images_on_gig_id"
 
   create_table "orders", force: :cascade do |t|
     t.string   "name",                limit: 255

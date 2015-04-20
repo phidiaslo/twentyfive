@@ -5,33 +5,29 @@
     <div class="col-md-9">
       <div class="gig-container-alt">
         <div class="button-bar">
-          <h1>Manage Orders</h1>
+          <h1>Manage Sales</h1>
         </div>
 
         <table class="table">
           <thead>
             <tr>
               <th>DATE</th>
-              <th>BUYER</th>
-              <th>SERVICE</th>
+              <th>ITEM</th>
               <th>STATUS</th>
               <th></th>
             </tr>
           </thead>
 
           <tbody>
-          <% @gigs.each do |gig| %>
-            <% @customer_orders.where(gig_id: gig).each do |order| %>
+            <% @customer_orders.each do |order| %>
               <tr>
                 <td>
-                  <%= link_to "Order ##{order.id}", gig_customer_order_path(gig, order) %>
+                  <%= link_to "Order ##{order.id}", gig_customer_order_path(order.gig, order) %>
                   <span class="next-line"><%= local_time_ago(order.purchased_at, '%d %b %Y at %l:%M %p') %></span>
                 </td>
                 <td>
-                  <%= link_to "#{order.gig.user.username}", user_path(order.buyer), target: "_blank" %>
-                </td>
-                <td>
-                  <span><%= link_to "#{order.gig.gig_title}", gig, target: "_blank" %></span>
+                  <%= link_to "#{order.gig.gig_title}", gig_path(order.gig), target: "_blank" %>
+                  <span class="next-line">Buyer: <%= link_to "#{order.buyer.username}", user_path(order.buyer), target: "_blank", class: "green-text font-10" %></span> 
                 </td>
                 <td><%= order.status %></td>
                 <td>
@@ -49,7 +45,6 @@
                 </td>
               </tr>
             <% end %>
-          <% end %>
           </tbody>
         </table>
       <center><%= paginate @customer_orders %></center>
