@@ -8,7 +8,7 @@ class CashoutsController < ApplicationController
   # GET /cashouts.json
   def user_cashout
     @cashouts = Cashout.where(user: current_user).page(params[:page]).per(20)
-    @customer_orders = CustomerOrder.all.includes(:gig, :buyer, :seller).order('created_at DESC').page(params[:page]).per(20)
+    @customer_orders = CustomerOrder.where(seller: current_user).includes(:gig, :buyer, :seller).order('created_at DESC').page(params[:page]).per(20)
     @pendings = @customer_orders.where(status: 'Pending')
   end
 
