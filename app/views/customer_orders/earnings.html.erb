@@ -5,7 +5,7 @@
     <div class="col-md-9">
       <div class="gig-container-alt">
         <div class="button-bar">
-          <h1>Earnings</h1>
+          <h1>Earnings<span class="float-right"><small><%= "Current Balance: RM #{number_with_precision(current_user.balance, precision: 2)}" %></small></span></h1>
         </div>
 
         <table class="table">

@@ -8,10 +8,12 @@ class CashoutsController < ApplicationController
   # GET /cashouts.json
   def user_cashout
     @cashouts = Cashout.where(user: current_user).page(params[:page]).per(20)
+    @customer_orders = CustomerOrder.all.includes(:gig, :buyer, :seller).order('created_at DESC').page(params[:page]).per(20)
+    @pendings = @customer_orders.where(status: 'Pending')
   end
 
   def index
-    @cashouts = Cashout.all.page(params[:page]).per(20)
+    @cashouts = Cashout.all.includes(:user).page(params[:page]).per(20)
   end
 
   # GET /cashouts/1
@@ -32,18 +34,22 @@ class CashoutsController < ApplicationController
   # POST /cashouts.json
   def create
     @cashout = Cashout.new(cashout_params)
-    @cashout.user_id = current_user.id
-
-    respond_to do |format|
-      if @cashout.save
-        format.html { redirect_to @cashout, notice: 'Cashout was successfully created.' }
-        format.json { render :show, status: :created, location: @cashout }
+      if @cashout.amount <= current_user.balance
+        @cashout.user_id = current_user.id
+        @cashout.status = 'In Progress'
+        respond_to do |format|
+          if @cashout.save
+            format.html { redirect_to @cashout, notice: 'Cashout was successfully created.' }
+            format.json { render :show, status: :created, location: @cashout }
+          else
+            format.html { render :new }
+            format.json { render json: @cashout.errors, status: :unprocessable_entity }
+          end
+        end
       else
-        format.html { render :new }
-        format.json { render json: @cashout.errors, status: :unprocessable_entity }
+        redirect_to new_cashout_url, notice: "Sorry, but you can't withdraw that much!"
       end
     end
-  end
 
   # PATCH/PUT /cashouts/1
   # PATCH/PUT /cashouts/1.json
@@ -69,6 +75,28 @@ class CashoutsController < ApplicationController
     end
   end
 
+  def edit_cashouts
+    @cashouts = Cashout.find(params[:cashout_ids])
+
+    if params[:commit] == 'Delete'
+      @cashouts.each { |cashout|
+        Cashout.destroy(cashout.id)  }
+    elsif params[:commit] == 'In Progress'
+      @cashouts.each { |cashout|
+        cashout.status = 'In Progress'
+        cashout.save 
+      }
+    else params[:commit] == 'Transferred'
+        @cashouts.each { |cashout|
+          cashout.status = 'Transferred'
+          cashout.save
+          user = User.find(cashout.user)
+          user.decrement!(:balance, cashout.amount) 
+        }
+    end
+    redirect_to :back, notice: 'All statuses has baeen successfully updated.'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cashout
@@ -85,4 +113,5 @@ class CashoutsController < ApplicationController
         redirect_to root_url, alert: "Sorry, but you're not allowed access to this page."
       end
     end
+
 end

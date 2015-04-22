@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   resources :customer_orders
 
-  resources :cashouts
+  resources :cashouts do
+    collection do
+    post :edit_cashouts
+  end
+  end
+
+  get 'my-cashouts' => "cashouts#user_cashout"
 
   resources :payment_notifications
   

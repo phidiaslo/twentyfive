@@ -4,15 +4,15 @@ class CustomerOrder < ActiveRecord::Base
     belongs_to :seller, class_name: "User"
 
     def send_notification_to_buyer
-      StatusMailer.notification_to_buyer(buyer, self).deliver_now
+      StatusMailer.notification_to_buyer(buyer, self).deliver_later
     end
 
     def send_notification_to_seller
-      StatusMailer.notification_to_seller(seller, self).deliver_now
+      StatusMailer.notification_to_seller(seller, self).deliver_later
     end
 
     def send_invoice_to_buyer
-      StatusMailer.invoice_to_buyer(buyer, self).deliver_now
+      StatusMailer.invoice_to_buyer(buyer, self).deliver_later
     end
 
     def paypal_url(return_path)

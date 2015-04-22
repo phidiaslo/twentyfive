@@ -28,6 +28,7 @@ gem 'font-awesome-sass', '~> 4.2.0'
 gem 'mandrill-api', '~> 1.0.53', require: "mandrill"
 gem 'local_time', '~> 1.0.2'
 gem 'aws-sdk', '< 2.0'
+gem 'sucker_punch'
 
 gem 'coffee-script-source', '1.8.0'
 

@@ -1,16 +1,14 @@
 <%= simple_form_for(@cashout) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-group">
-    <%= f.association :user, required: true, input_html: {class: "input-sm form-control"}%>
-  </div>
-  
-  <div class="form-group">
-    <%= f.input :amount, required: true,input_html: {class: "input-sm form-control"} %>
-  </div>
-
-  <div class="form-group">
+  <% if current_user.role == 'Admin' %>
+  <div class="form-group center">
     <%= f.input :status, required: true, collection: Cashout::STATUS_SELECT, as: :radio_buttons, item_wrapper_class: "radio-inline" %>
+  </div>
+  <hr>
+  <% end %>
+  <div class="form-group">
+    <%= f.input :amount, required: true, input_html: {value: current_user.balance, class: "input-sm form-control"} %>
   </div>
 
   <div class="form-group">

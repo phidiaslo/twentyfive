@@ -77,12 +77,14 @@ class CustomerOrdersController < ApplicationController
 
   def earnings
     @gigs = Gig.where(user: current_user)
-    @customer_orders = CustomerOrder.where(seller: current_user, status: 'Completed').includes(:gig, :seller).order('purchased_at DESC').page(params[:page]).per(20)
+    @customer_orders = CustomerOrder.where(seller: current_user, status: 'Completed').includes(:gig, :buyer, :seller).order('purchased_at DESC').page(params[:page]).per(20)
     @pendings = @customer_orders.where(status: 'Pending')
   end
 
   def edit_customer_order_status
     @customer_order = CustomerOrder.find(params[:id])
+    @seller = User.find(@customer_order.seller)
+    
     if params[:commit] == "Pending"
       @customer_order.update(status: "In Progress")
       @customer_order.send_notification_to_buyer
@@ -92,7 +94,8 @@ class CustomerOrdersController < ApplicationController
       @customer_order.send_notification_to_buyer
       redirect_to :back, notice: "Status has been succesfully updated to 'Delivered'."
     else params[:commit] == "Delivered"
-      @customer_order.update(status: "Completed")      
+      @customer_order.update(status: "Completed")
+      @seller.increment!(:balance, 20)
       @customer_order.send_notification_to_seller
       redirect_to :back, notice: "You have confirmed the completion of this order. Now, you can leave a review to the seller. :)"
     end

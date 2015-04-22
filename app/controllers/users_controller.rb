@@ -49,7 +49,7 @@ class UsersController < ApplicationController
  
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:avatar, :role, :name, :username, :description, :email, :address_one, :address_two, :zipcode, :city, :state, :country)
+      params.require(:user).permit(:avatar, :role, :name, :username, :description, :email, :address_one, :address_two, :zipcode, :city, :state, :country, :balance)
     end
 
     def verify_seller_admin

@@ -1,0 +1,45 @@
+<% title 'Cashouts' %>
+<% noindex %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="gig-container-alt">
+        <div class="button-bar">
+          <h1>Cashouts
+          <%= link_to "Send Cashout Request", new_cashout_path, class: "btn btn-smaller btn-success float-right" %>
+          </h1>
+          <hr>
+          <h5 class="text-right">Current Balance: <span class="green-text"><%= "RM #{number_with_precision(current_user.balance, precision: 2)}" %></span></h5>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>DATE</th>
+              <th>AMOUNT</th>
+              <th>STATUS</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @cashouts.each do |cashout| %>
+              <tr>
+                <td>
+                  <%= "Cashout ##{cashout.id}" %>
+                  <span class="next-line"><%= local_time_ago(cashout.created_at, '%d %b %Y at %l:%M %p') %></span>
+                </td>
+                <td>
+                  <%= "RM #{number_with_precision(cashout.amount, precision: 2)}" %>
+                </td>
+                <td><%= cashout.status %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <center><%= paginate @cashouts %></center>
+      </div>
+    </div>
+    <div class="col-md-3 right-sidebar">
+      <%= render 'dashboard/sidebar' %>
+    </div>
+  </div>
+</div>
