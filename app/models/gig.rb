@@ -16,7 +16,7 @@ class Gig < ActiveRecord::Base
     has_many :images, dependent: :destroy
     accepts_nested_attributes_for :images, :reject_if => lambda { |t| t['graphic'].nil? }, :allow_destroy => true
 
-    after_create :send_gig_notification
+    #after_create :send_gig_notification
 
     def send_gig_notification
     AdminMailer.new_gig(self).deliver

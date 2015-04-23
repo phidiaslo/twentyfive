@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
     @users = User.all
     @categories = Category.all
     @subcategories = Subcategory.all
+    @pendingcashouts = Cashout.where(status: 'Pending')
   end
 
   protected

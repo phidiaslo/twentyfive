@@ -1,6 +1,6 @@
 <ul>
   <li><h5>Daily Administration</h5></li>
-  <li><%= link_to "Cashout Requests", cashouts_path %> <span class="badge"><%= Cashout.where(status: 'In Progress').count %></span></li>
+  <li><%= link_to "Cashout Requests", cashouts_path %> <span class="badge"><%= @pendingcashouts.count if @pendingcashouts.size > 0 %></span></li>
   <br>
   <li><h5>Manage Databases</h5></li>
   <li><%= link_to "Orders", admin_path %> <%= "(#{CustomerOrder.all.count})" %></li>
