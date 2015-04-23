@@ -14,6 +14,7 @@
               <th>NUMBER</th>
               <th>ITEM</th>
               <th>STATUS</th>
+              <th>PAYMENT</th>
               <th></th>
             </tr>
           </thead>
@@ -30,6 +31,7 @@
                   <span class="next-line">Buyer: <%= link_to customer_order.buyer.username, user_path(customer_order.buyer), target: "_blank", class: "green-text font-10" %>, Seller: <%= link_to customer_order.seller.username, user_path(customer_order.seller), target: "_blank", class: "green-text font-10" %> </span>
                 </td>
                 <td><%= customer_order.status %></td>
+                <td><%= customer_order.payment_status %></td>
                 <td>
                   <%= link_to 'Edit', edit_gig_customer_order_path(customer_order.gig, customer_order) %>
                   <%= link_to 'Delete', gig_customer_order_path(customer_order.gig, customer_order), method: :delete, data: { confirm: 'Are you sure?' } %>

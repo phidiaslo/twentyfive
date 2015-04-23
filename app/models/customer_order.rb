@@ -17,7 +17,7 @@ class CustomerOrder < ActiveRecord::Base
 
     def paypal_url(return_path)
         values = {
-            business: "seller@twenty.com",
+            business: "twentyfivesuccess@gmail.com",
             cmd: "_cart",
             upload: 1,
             return: "#{Rails.application.secrets.app_host}#{return_path}",
